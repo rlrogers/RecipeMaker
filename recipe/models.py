@@ -1,14 +1,20 @@
-import datetime
-
 from django.db import models
-from django.utils import timezone
-from django.core.validators import MaxValueValidator
 
 
-class Ingredients(models.Model):
-    number_of_ingredients = models.IntegerField(blank=True, null=True, validators=[MaxValueValidator(25)])
-    ingredient = models.CharField(max_length=20)
-    ingredient_amount = models.IntegerField(blank=True, )
+class RecipeDetails(models.Model):
+    # cook = models.ForeignKey("Cook.Model", verbose_name=_("cook"), on_delete=models.CASCADE) Will add Cook App later
+    cook = models.CharField( max_length=50)
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
+    number_of_ingredients = models.IntegerField(blank=True)
+    ingredient_amount = models.DecimalField( max_digits=2, decimal_places=2)
+    instruction = models.TextField(
+        "Place instruction here...", max_length=1000)
+    prep_time = models.IntegerField()
+    cooking_time = models.IntegerField()
+    serves_amount = models.IntegerField()
+    serves_ppl = models.IntegerField()
     published_date = models.DateTimeField('Recipe made:')
-
+    def __str__(self):
+        return self.name
     
