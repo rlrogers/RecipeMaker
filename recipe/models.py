@@ -1,22 +1,19 @@
 from django.db import models
-
+from datetime import timezone
 
 class RecipeDetails(models.Model):
-    # cook = models.ForeignKey("Cook.Model", verbose_name=_("cook"), on_delete=models.CASCADE) Will add Cook App later
-    Dish_Author = models.CharField( max_length=50)
-    Dish = models.CharField(max_length=50)
-    description = models.CharField(max_length=50)
+    Dish = models.CharField(max_length=50, blank=True)
+    description = models.CharField(max_length=50, blank=True)
     number_of_ingredients = models.IntegerField(blank=True)
-    ingredient_amount = models.DecimalField( max_digits=2, decimal_places=2)
-    instruction = models.TextField(
-        "Place instruction here...", max_length=1000)
-    prep_time = models.IntegerField()
-    cooking_time = models.IntegerField()
-    serves_amount = models.IntegerField()
-    serves_ppl = models.IntegerField()
-    published_date = models.DateTimeField('Recipe made:')
+    ingredient_amount = models.DecimalField( max_digits=2, decimal_places=2, null=True)
+    instruction = models.TextField("Place instruction here...", max_length=1000)
+    prep_time = models.IntegerField( blank=True)
+    cooking_time = models.IntegerField( default=0)
+    serves_amount = models.IntegerField(blank=True)
+    serves_ppl = models.IntegerField(blank=True)
+    # published_date = models.DateTimeField(default=timezone.now)
     class Meta:
-        verbose_name_plural = "RecipeDetails"
+        verbose_name_plural = "Recipe Details"
     def __str__(self):
         return self.name
     
