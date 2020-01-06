@@ -3,11 +3,14 @@ from django.contrib import admin
 from django.urls import include, path
 from recipe import views
 
+
 urlpatterns = [
    
     path('recipe/', include('recipe.urls')),
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
+    # test
+    path('test/', views.test, name='test'),
 
 ]
 
