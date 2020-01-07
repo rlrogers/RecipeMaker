@@ -12,14 +12,22 @@ def index(request):
 
 def test(request):
     context = {
-        "test_text": "Success The test context text and confirm test number of 123 =",
-        "my_number": 123,
-        "my_list": [123, 312, 789]
+        "test_text": "Success The test context text and confirm test number of 123 = ",
+        "test_number": 123
     }
     return render(request, "test.html", context)
 
 
+def product_detail_view(request):
+    obj = RecipeDetails.objects.get(id=1)
+    # context = {
+    #     'Dish': obj.Dish,
+    #     'num': obj.number_of_ingredients
+    # }
+    context = {
+        'object': obj
+    }
+    return render(request, "recipe/detail.html", context)
+
 # def about(request):
 #     return render(request, 'recipe/index.html')
-
-
