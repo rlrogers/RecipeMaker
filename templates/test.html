@@ -5,7 +5,17 @@
 <h1>Test.html</h1>
 
 <p>
-{{ test_text }}, {{ test_number }}
+{{ test_text }}, {{ test_number }}, {{ my_list }}
 </p>
+<ul>
+    {% for item in my_list %}
+        {% if item == 312 %}
+            <li>{{ forloop.counter }} - {{ item|add:22 }}</li>
+        {% else %}
+            <li>{{ forloop.counter }} - {{ item }}</li>
+            {% endif %}
+
+    {% endfor %}
+</ul>
 
 {% endblock %}

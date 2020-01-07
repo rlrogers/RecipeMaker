@@ -13,7 +13,8 @@ def index(request):
 def test(request):
     context = {
         "test_text": "Success The test context text and confirm test number of 123 =",
-        "my_number": 123
+        "my_number": 123,
+        "my_list": [123, 312, 789]
     }
     return render(request, "test.html", context)
 
