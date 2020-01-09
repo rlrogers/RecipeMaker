@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import RecipeDetails
-from .forms import ProductForm
+from .forms import ProductForm, RawProductForm
 
 def home_view(request):
     return render(request, "home.html", {})
@@ -19,14 +19,28 @@ def test(request):
 
 
 def product_create_view(request):
-    form = ProductForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        form = ProductForm()
+    my_form = RawProductForm()
     context = {
-        'form': form
+        "form": my_form
     }
     return render(request, "recipe/product_create.html", context)
+
+
+# def product_create_view(request):
+#     my_new_title = request.POST.get('Dish')
+#     print(my_new_title)
+#     context = {}
+#     return render(request, "recipe/product_create.html", context)
+
+# def product_create_view(request):
+#     form = ProductForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()
+#         form = ProductForm()
+#     context = {
+#         'form': form
+#     }
+#     return render(request, "recipe/product_create.html", context)
 
 def product_detail_view(request):
     obj = RecipeDetails.objects.get(id=1)
