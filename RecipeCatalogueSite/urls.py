@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from recipe import views
-from recipe.views import product_detail_view
+from recipe.views import product_detail_view, product_create_view
 
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('', views.home_view, name='home'),
     # test
     path('test/', views.test, name='test'),
+    path('create/', product_create_view),
     path('product/', product_detail_view),
 
 ]
