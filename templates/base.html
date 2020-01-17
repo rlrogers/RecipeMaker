@@ -11,16 +11,18 @@
     <title>Recipe Maker!</title>
   </head>
   <body>
-    {% include 'nav.html'%}
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-          {{ message }}
-        </div>
-      {% endfor %}
-    {% endif %}
-    {% block content %}
-    <h1>Replacement content</h1>
+    <div class="container">
+      {% include 'nav.html'%}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% block content %}
+      <h1>Replacement content</h1>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

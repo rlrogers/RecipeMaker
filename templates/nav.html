@@ -1,12 +1,24 @@
-<!-- Edit Below/Rough -->
-<nav>
-    <ul>
-        <li>Logo</li>
-        <li>Your Recipes</li>
-        <li>Discover Recipes</li>
-        <li>Dashboard</li>
-        <li>Login</li>
-    </ul>
-</nav>
-
-
+  <!-- Navbar  -->
+  <div class="container mt-4">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand mb-2"
+            href="#">Richard L. Rogers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class=" collapse navbar-collapse"
+            id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Recipes <span class="sr-only">(current)</span></a>
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link"  href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</div>
+<hr>
+<!-- /Navbar  -->
