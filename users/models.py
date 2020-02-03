@@ -7,5 +7,8 @@ class Profile(models.Model):
     # Still need to set default 
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f'{self.user.username} Profile '

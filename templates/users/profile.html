@@ -1,20 +1,27 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 
     
     <div class=" container border-top pt-3">
 
         <div class="content-section">
-            <img  alt="" class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="height: 100px; width: 100px; transform: rotate(0deg);">
 
             <h2>You have been logged in, {{ user.username }}.</h2>
             <p class="text-secondar"> {{ user.email }}</p>
-
-            <h2>Hello from 'users/profile.html'</h2>
-            <small class="texted-muted">
-                <a href="{% url 'login' %}" class="" href="#">Log in Again</a>
-            </small>
         </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group col-8">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
     </div>
 
 {% endblock %}
