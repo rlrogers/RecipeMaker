@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from users import views as user_views
+from  django.conf import settings
+from django.conf.urls.static import static
 # below, please add 'as recipe_views' in a cruch atm  
 from recipe import views
 from recipe.views import product_detail_view, product_create_view, dynamic_lookup_view
@@ -26,6 +28,11 @@ urlpatterns = [
 
 ]
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.STATIC_ROOT)
+
+
+
+

@@ -3,11 +3,18 @@
 
     
     <div class=" container border-top pt-3">
-        <h2>You have been logged in, {{ user.username }}.</h2>
-        <h2>Hello from 'users/profile.html'</h2>
-        <small class="texted-muted">
-            <a href="{% url 'login' %}" class="" href="#">Log in Again</a>
-        </small>
+
+        <div class="content-section">
+            <img  alt="" class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+
+            <h2>You have been logged in, {{ user.username }}.</h2>
+            <p class="text-secondar"> {{ user.email }}</p>
+
+            <h2>Hello from 'users/profile.html'</h2>
+            <small class="texted-muted">
+                <a href="{% url 'login' %}" class="" href="#">Log in Again</a>
+            </small>
+        </div>
     </div>
 
 {% endblock %}
