@@ -1,10 +1,24 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+# list view
+from django.views.generic import ListView
 from .models import RecipeDetails
 from .forms import ProductForm, RawProductForm
 
+
+
+
 def home_view(request):
-    return render(request, "home.html", {})
+    context = {
+        'recipes': RecipeDetails.objects.all()
+    }
+    return render(request, "home.html", context)
+
+class PostListView(ListView):
+    model = RecipeDetails
+    template_name = ''
+    context_object_name = 'recipes'
+    order = ['-date_posted']
 
 def index(request):
     latest_recipes = RecipeDetails.objects.order_by('-pub_date')[:5]
