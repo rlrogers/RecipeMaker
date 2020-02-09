@@ -1,15 +1,19 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from .views import PostListView
+
 from django.contrib.auth.decorators import login_required
 from . import views
+from .views import (
+    RecipeListView,
+    RecipeDetailView,
+)
 
 
 app_name='recipe'
 urlpatterns = [
-    path('', PostListView.as_view(), name='index'),
-    path('test', views.test, name='test')
+    path('', RecipeListView.as_view(), name='recipe-list'),
+    path('<int:pk>/', RecipeDetailView.as_view(), name='recipe-detail'),
     # path('about', views.about, name='about'),
 ]
 

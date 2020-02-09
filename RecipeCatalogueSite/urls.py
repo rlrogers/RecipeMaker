@@ -13,6 +13,7 @@ from recipe.views import product_detail_view, product_create_view, dynamic_looku
 urlpatterns = [
    
     path('admin/', admin.site.urls),
+    path('recipe/', include('recipe.urls')),
     path('register', user_views.register, name='register'),   
     path('profile', user_views.profile, name='profile'),   
     path('login', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),   

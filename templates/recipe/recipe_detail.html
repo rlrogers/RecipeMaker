@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{ object.Dish }}</h1>
+    <h3>Recipe by {{ object.author }} </h3>
+    <p>Ingredients: {{ object.ingredients }}</p>
+    <p>Instructions: {{ object.instruction }}</p>
+    <p>Prep time: {{ object.prep_time }} minutes.</p>
+    <p>Cooking time: {{ object.cooking_time }} minutes</p>
+    <p>Servings: {{ object.servings }}</p>
+    <p>Published on: {{ object.published_date }}</p>
+    <p> </p>
+
+{% endblock %}
