@@ -12,6 +12,12 @@ class RecipeDetails(models.Model):
     servings = models.IntegerField(blank=True, default=1)
     published_date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    photo_3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    photo_4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    photo_5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     class Meta:
         verbose_name_plural = "Recipe Details"
     

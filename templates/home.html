@@ -1,11 +1,21 @@
 {% extends 'base.html'%}
 
 {% block content %}
-<h1>HomeHtml</h1>
+<h1>Latest Recipes HOME</h1>
 
 <div class="container">
-    {% for post in posts %}
-        <h1>{{ posts.dish }}</h1>
+    {% for recipes in recipe %}
+        
+       <h1>{{ recipes.Dish }}</h1>
+       <img src="{{ recipe.photo_1.url }}" alt="">
+       <div class="row">
+           <!-- Fix this photo placement, wrong src  -->
+            <img class= "rounded-circle" src="{{ recipes.author.profile.image.url }}" style="width: 50px;">
+            <h3>By: {{ recipes.author }}</h3>
+        </div>
+        <p>{{ recipes.instruction }}</p>
+        <i>Created on: {{ recipes.published_date }}</i>
+        <hr>
     {% endfor %}
     
 </div>

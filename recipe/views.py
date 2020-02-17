@@ -14,7 +14,7 @@ from django.views.generic import (
 
 def home_view(request):
     context = {
-        'posts': RecipeDetails.objects.all()
+        'recipe': RecipeDetails.objects.all()
     }
     return render(request, "home.html", context)
 
@@ -25,8 +25,6 @@ class RecipeListView(ListView):
 class RecipeDetailView(DetailView):
     template_name = 'recipe/recipe_detail.html'
     queryset = RecipeDetails.objects.all() 
-
-
 
 def index(request):
     latest_recipes = RecipeDetails.objects.order_by('-pub_date')[:5]
