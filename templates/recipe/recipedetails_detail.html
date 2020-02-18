@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 
-
-
 {% block content %}
+recipedetails_detail.html
     <div class="content">
-        <!-- Fix this below... the img src  -->
-        <img src="{{ RecipeDetails.photo_1.url}}" alt= "{{object.Dish}}" class="img-fluid">
-        <h1>{{ object.Dish }}</h1>
+        <img src="{{ object.photo_1.url}}" alt= "{{object.Dish}}" class="img-fluid">
+        <h1 class="article-title">{{ object.Dish }}</h1>
         <img  alt="" class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="width: 100px;">
         <h3>Recipe by {{ object.author }} </h3>
         <p>Ingredients: {{ object.ingredients }}</p>

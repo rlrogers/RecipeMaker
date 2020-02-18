@@ -19,12 +19,15 @@ def home_view(request):
     return render(request, "home.html", context)
 
 class RecipeListView(ListView):
-    template_name = 'recipe/recipe_list.html'
-    queryset = RecipeDetails.objects.all() #recipe/<modelname>_list.html
+    model = RecipeDetails
+    template_name = 'recipe/home.html'
+    context_object_name = 'recipes'
+    ordering = ['-date_posted']
+
+     #recipe/<modelname>_list.html
 
 class RecipeDetailView(DetailView):
-    template_name = 'recipe/recipe_detail.html'
-    queryset = RecipeDetails.objects.all() 
+    model = RecipeDetails 
 
 def index(request):
     latest_recipes = RecipeDetails.objects.order_by('-pub_date')[:5]
