@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import RecipeDetails
 from .forms import ProductForm, RawProductForm
@@ -26,8 +26,18 @@ class RecipeListView(ListView):
 
      #recipe/<modelname>_list.html
 
+
+
+# Work on this Detail view below 
 class RecipeDetailView(DetailView):
     model = RecipeDetails 
+    # template_name = 'recipe/recipe_detail.html'
+
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(RecipeDetails, id=id_)
+
+
 
 def index(request):
     latest_recipes = RecipeDetails.objects.order_by('-pub_date')[:5]
