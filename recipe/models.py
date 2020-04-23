@@ -1,5 +1,5 @@
 from django.db import models
-# cleanup timezone imports below
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -18,6 +18,12 @@ class RecipeDetails(models.Model):
     photo_4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+  
     class Meta:
-        verbose_name_plural = "Recipe Details"
+            verbose_name_plural = "Recipe Details"
+
+    def get_absolute_url(self):
+        return reverse("recipe:recipe-detail", kwargs={"id": self.id})
+
+    
     

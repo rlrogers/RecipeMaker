@@ -1,15 +1,19 @@
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.http import HttpResponse
 from .models import RecipeDetails
-from .forms import ProductForm, RawProductForm
-# List View
-from django.views.generic import (
-    CreateView,
-    DetailView,
-    ListView,
-    UpdateView,
-    DeleteView
-)
+# from .forms import ProductForm, RawProductForm`
+from .forms import NewRecipeForm
+# List View commented out below and imported random instead
+# from django.views.generic import (
+#     CreateView,
+#     DetailView,
+#     ListView,
+#     UpdateView,
+#     DeleteView,
+# )
+
+from django.views import generic
 
 
 def home_view(request):
@@ -18,20 +22,35 @@ def home_view(request):
     }
     return render(request, "home.html", context)
 
-class RecipeListView(ListView):
+# class IndexView(generic.ListView):
+#     template_name = "home.html"
+
+#     def get_queryset(self):
+#         return RecipeDetails.objects.all()
+
+class RecipeCreatetView(generic.CreateView): 
+    template_name = 'recipe/recipe_create.html'
+    form_class = NewRecipeForm
+    query_set = RecipeDetails.objects.all()
+    
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+
+class RecipeListView(generic.ListView): 
+    query_set = RecipeDetails.objects.all() #recipe/<modelname>_list.html
     model = RecipeDetails
-    template_name = 'recipe/home.html'
+    template_name = 'recipe/recipe_list.html'
     context_object_name = 'recipes'
-    ordering = ['-date_posted']
-
-     #recipe/<modelname>_list.html
-
+    # ordering = ['-date_posted']
 
 
 # Work on this Detail view below 
-class RecipeDetailView(DetailView):
-    model = RecipeDetails 
-    # template_name = 'recipe/recipe_detail.html'
+class RecipeDetailView(generic.DetailView):
+    template_name = 'recipe/recipe_detail.html'
+    query_set = RecipeDetails.objects.all()
+    model = RecipeDetails
 
     def get_object(self):
         id_ = self.kwargs.get("id")
@@ -43,75 +62,15 @@ def index(request):
     latest_recipes = RecipeDetails.objects.order_by('-pub_date')[:5]
     return render(request, 'recipe/index.html')
 
-def test(request):
-    context = {
-        "test_text": "Success The test context text and confirm test number of 123 = ",
-        "test_number": 123
-    }
-    return render(request, "test.html", context)
-
-def dynamic_lookup_view(request, my_id):
-    obj = RecipeDetails.objects.get(id=my_id)
-    context = {
-        "object": obj
-    }
-    return render(request, "recipe/detail.html")
 
 
-# def product_create_view(request):
-#     my_form = RawProductForm()
-#     if request.method == "POST":
-#         my_form = RawProductForm(request.POST)
-#         if my_form.is_valid():
-#             # now the data is good
-#             print(my_form.cleaned_data)
-#             RecipeDetails.objects.create(**my_form.cleaned_data)
-#         else:
-#             print(my_form.errors)
-#     context = {
-#         "form": my_form
-#     }
-#     return render(request, "recipe/product_create.html", context)
-
-
-# def product_create_view(request):
-#     my_new_title = request.POST.get('Dish')
-#     print(my_new_title)
-#     context = {}
-#     return render(request, "recipe/product_create.html", context)
-
-# Clean up or toss below
-# def render_initial_data(request):
-#     initial_data = {
-#         'dish': "Initial Data"
-#     }
-#     obj = Product.objects.get(id=1)
-#     form = RawProductForm(request.POST or None, initial=initial_data, instance=obj)
-#     context = {
-#         'form': form
-#     }
-#     return render(request, "recipe/product_create.html", context)
-
+#  Commented below app for references as moving on to class-based
 def product_create_view(request):
-    form = ProductForm(request.POST or None)
+    form = NewRecipeForm(request.POST or None)
     if form.is_valid():
         form.save()
         form = ProductForm()
     context = {
         'form': form
     }
-    return render(request, "recipe/product_create.html", context)
-
-def product_detail_view(request):
-    obj = RecipeDetails.objects.get(id=1)
-    # context = {
-    #     'Dish': obj.Dish,
-    #     'num': obj.number_of_ingredients
-    # }
-    context = {
-        'object': obj
-    }
-    return render(request, "recipe/detail.html", context)
-
-# def about(request):
-#     return render(request, 'recipe/index.html')
+    return render(request, "recipe/recipe_create.html", context)

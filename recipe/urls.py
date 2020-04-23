@@ -5,15 +5,18 @@ from django.urls import path
 from django.contrib.auth.decorators import login_required
 from . import views
 from .views import (
-    RecipeListView,
+    RecipeCreatetView,
     RecipeDetailView,
-)
+    RecipeListView,
 
+    
+)
 
 app_name='recipe'
 urlpatterns = [
     path('', RecipeListView.as_view(), name='recipe-list'),
-    path('<int:pk>/', RecipeDetailView.as_view(), name='recipe-detail'),
+    path('<int:id>/', RecipeDetailView.as_view(), name='recipe-detail'),
+    path('create/', RecipeCreatetView.as_view(), name='recipe-create'),
     # path('about', views.about, name='about'),
 ]
 
