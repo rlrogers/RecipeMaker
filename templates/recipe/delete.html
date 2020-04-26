@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>Landing page of recipe_delete.html</p>
+    <hr>
+    <div class="container">
+        <!-- <h1>Are you sure you would to delete the recipe {{ object.Dish }}</h1> -->
+       <!-- <form action='.' moethod='POST'> 
+           {% csrf_token %}
+           <button class="btn-danger" type="submit" value="Yes"> <a href="../"></a> Yes, delete {{ object.Dish }}</button>
+        </form> -->
+       <form action='.' method='POST'>
+           {% csrf_token %}
+           <h3>Do you want to delete the post</h3>
+           <p><input type="submit" value="Yes"/></p>
+        </form>
+
+
+
+    </div>  
+{% endblock %}

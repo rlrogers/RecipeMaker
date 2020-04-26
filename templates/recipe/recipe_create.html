@@ -3,9 +3,9 @@
 {% block content %}
 <h1>created test</h1>
     <div class="content">
-        <form action='.' methoc='POST'>
+        <form action='.' method='POST'>
             {% csrf_token %}
-            {{ form.as_ul}}
+            {{ form.as_ul }}
             <input type='submit' value='Save' />
         </form>
     </div>
