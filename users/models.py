@@ -4,7 +4,7 @@ from PIL import Image
 # Create your models here.
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     # Still need to set default 
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
